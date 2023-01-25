@@ -1,8 +1,10 @@
 var express = require('express')
 var app = express();
 
+app.use (express.static(__dirname + '/public'));
+
 app.get('/home', function(req, res) {
-    res.send('pagina inicial');
+    res.sendFile(__dirname + '/public/HTML/home.html')
 });
 
 app.get('/JovemTech/listaalunos', function(req, res) {
