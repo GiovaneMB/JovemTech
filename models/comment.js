@@ -14,4 +14,4 @@ module.exports = Comment
 
 
 //Comando para criar a tabela, executar so uma vez
-Comment.sync({force: true}) 
+//Comment.sync({force: true}) 
