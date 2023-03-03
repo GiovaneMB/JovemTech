@@ -1,46 +1,46 @@
-var express = require('express')
-var app = express();
-const handlebars = require ('express-handlebars')
-const bodyParser = require ('body-Parser')
-const Comment = require ('./models/comment')
+const express = require('express');
+const app = express();
+const handlebars = require('express-handlebars')
+const bodyParser = require('body-Parser')
+const Comment = require('./models/comment')
 //Config
   //Template Engine
   app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //Body Parser
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended: false }))
 app.set(bodyParser.json())
 //Rotas Inicial
         app.get('/',function(req,res){
-            Comment.findAll({order:[['id','DESC']]}).then(function(comments){
-                res.render('home', {comments:comments})
+            Comment.findAll({order:[['id','DESC']]}).then(function(comments) {
+                res.render('home', {comments: comments})
             })
              }) 
  //Rota do Formulario
-        app.get('/form',function(req,res){
+        app.get('/form',function (req,res) {
             res.render('formulario.handlebars')
         }) 
 //Rotas "post" so pode ser  acessada quando alguem faz uma requisição
-        app.post('/add',function(req,res){
+        app.post('/add',function (req,res) {
             comment.create({
                 titulo: req.body.titulo,
                 conteudo: req.body.conteudo
             }).then(function(){
                 res.redirect('/')
-            }).catch(function(erro){
-                res.send("Comentario nao pode ser criado" + erro)
+            }).catch(function (erro) {
+                res.send('Comentario nao pode ser criado' + erro)
             })
         })
 
         //Rota para deletar comentarios
-        app.get('/deletar/:id',function(req,res){
-            comment.destroy ({where: {'id':req.params.id}}).then(function(){
-                res.send("Comentario deletado com sucesso")
-            }).catch(function(erro){
+        app.get('/deletar/:id',function (req,res) {
+            comment.destroy ({where: {'id':req.params.id}}).then(function () {
+                res.redirect('/')
+            }).catch(function (erro) {
                 res.send('Ocorreu um erro')
             })
         })
 
-app.listen(8081,function(){
-    console.log('servidor rodando na porta http://localhost:8081/');
+app.listen(8081,function () {
+    console.log("servidor rodando na porta http://localhost:8081/");
 });

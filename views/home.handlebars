@@ -4,9 +4,14 @@
 
 {{#each comments}}
     <h3>{{titulo}}</h3>
-    <h4>{{conteudo}}</h4>
+    <h4>{{conteudo}}</p>
     <small>{{createdAt}}</small>
-    <a href="/deletar/{{id}}"><button>deletar</button></a>
-    <hr></div>
-
+    <a href="/deletar/{{id}}"><button onclick="myFunction()">deletar</button></a>
+    <hr>
+    </div>
+    <script>
+        fuunction myFunction() {
+            alent("comentario excluido")
+        }
+    </script>
 {{/each}}    
